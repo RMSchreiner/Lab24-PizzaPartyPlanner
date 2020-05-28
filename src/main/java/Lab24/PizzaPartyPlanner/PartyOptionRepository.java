@@ -3,12 +3,12 @@ package Lab24.PizzaPartyPlanner;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.ui.Model;
+
+import co.grandcircus.productcategories.entity.Product;
 
 public interface PartyOptionRepository extends JpaRepository<PartyOption, Long> {
-
-    List<PartyOption> findByDescription(String description);
 	
+	List<PartyOption> findByPartyId(Long partyId);
 	
-	List<PartyOption> findByNameContainingIgnoreCase(String name);
-	
-}
+	}

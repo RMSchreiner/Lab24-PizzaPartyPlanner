@@ -1,8 +1,9 @@
 package Lab24.PizzaPartyPlanner;
 
-import java.util.List;
+import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,102 +15,47 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class PartyController {
 
 	
-//	@Autowired
-//	private PartyRepository repository;
+	@Autowired
+	private PartyRepository partyRepository;
+	@Autowired
+	private PartyOptionRepository partyOptionRepository;
 	
-	
-	@RequestMapping("/")
-	public String index() {
-
-		return "home";
-	}
-	
-	
-	
-	
-	
-//	@RequestMapping("/food")
-//	public String listFood(@RequestParam(value="keyword",required=false) String keyword,Model model) {
-//
-//		// TODO: add entire list of foods
-//		
-//		if(keyword != null && !keyword.isEmpty()) {
-//			
-//			List<Food> foodList = repository.findByNameContainingIgnoreCase(keyword);
-//			model.addAttribute("foodList", foodList);
-//			
-//		}else {
-//			
-//			List<Food> foodList = repository.findAll();
-//			model.addAttribute("foodList", foodList);
-//			
+		@RequestMapping("/")
+		public String list(Model model) {
+			model.addAttribute("party", partyRepository.findAll(Sort.by("name")));
+			System.out.println(partyRepository.findAll(Sort.by("name")));
+			return "home";
+		}
+		
+		@RequestMapping("/home")
+		public String home() {
+			return "redirect:/";
+		}
+		
+		
+		
+//		@RequestMapping("/review")
+//		public String review() {
+//			return "review";
 //		}
-//		
-//		
-//		
-//		return "list-food";
-//	}
-//	
-//	/*
-//	 * 
-//	 * 
-//	 */
-//	
-//	@RequestMapping("/food/create")
-//	public String showCreateForm(Model model) {
-//		
-//		
-//		model.addAttribute("title","Add a Food");
-//		return "food-form";
-//	}
-//	
-//	@PostMapping("/food/create")
-//	public String submitCreateForm(Food food) {
-//		
-//		// TODO: create
-//		System.out.println(food);
-//		
-//		repository.save(food);
-//		
-//		return "redirect:/food";
-//	}
-//	
-//	/*
-//	 * 
-//	 * 
-//	 */
-//	
-//	@RequestMapping("/food/update")
-//	public String showEditForm(@RequestParam(value="id",required=false) Long id, Model model) {
-//		
-//		//TODO
-//		
-//		// findById returns an Optional<Type>
-//		// we must give a default value (if no instance is found)
-//		Food food = repository.findById(id).orElse(null);
-//		
-//		model.addAttribute("food",food);
-//		model.addAttribute("title","Edit a Food");
-//		return "food-form";
-//	}
-//	
-//	@PostMapping("/food/update")
-//	public String submitEditForm(Food food) {
-//		
-//		// TODO: update
-//		repository.save(food);
-//		
-//		return "redirect:/food";
-//	}
-//	
-//	@RequestMapping("/food/delete/{id}")
-//	public String removeFood(@PathVariable("id") Long id) {
-//		
-//		// TODO: delete
-//		repository.deleteById(id);
-//		
-//		return "redirect:/food";
-//	}
+		
+		@RequestMapping("/review")
+		public String listOption(Model model) {
+			model.addAttribute("optionlist", partyOptionRepository.findAll(Sort.by("votes")));
+			return "review";
+		}
+		
+		
+		
+	
+		// category parameter - collects inputs from form
+//		@PostMapping("/add-category")
+//		public String submitAddForm(Category category, Model model) {
+//			categoryRepository.save(category);
+//			model.addAttribute("category", category);
+//			return "category-add-confirm";
+//		}
+		
 	
 	
 

@@ -8,8 +8,28 @@
 <title>Insert title here</title>
 </head>
 <body>
+<p>Navigation:
+<a href="/home"> Scheduled Parties </a>
+<a href="/vote">Options & Votes</a>
+</p>
 
-<p> review</p>
+<h1>Pizza Options</h1>
+
+<table>
+		<tr>
+			<th>Name</th><th>Description</th><th>Votes</th>
+		</tr>
+		<c:forEach items="${optionlist}" var="optionlist" >
+	    <tr>
+	    	<td><c:out value= "${optionlist.name}" /></td>
+			<td><c:out value= "${optionlist.description}" /></td>
+			<td><c:out value= "${optionlist.votes}" /></td>
+		</tr>             
+		</c:forEach>
+	</table>
+
+
+
 
 </body>
 </html>

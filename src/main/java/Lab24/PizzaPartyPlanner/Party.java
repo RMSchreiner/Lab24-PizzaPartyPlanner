@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "party")
 public class Party {
     
 	@Id
@@ -17,6 +16,19 @@ public class Party {
 	private Long id;
 	private String name;
 	private LocalDate date;
+
+
+	
+	public Party() {
+	super();	
+	}
+	
+	public Party(Long id, String name, LocalDate date) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.date = date;
+	}
 
 	public Long getId() {
 		return id;
